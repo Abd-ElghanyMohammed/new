@@ -1,11 +1,11 @@
 # Use PHP 8.2 with Apache
 FROM php:8.2-apache
 
-# Copy all project files to Apache web root
+# Copy project files to web root
 COPY . /var/www/html/
 
-# Enable mysqli extension
+# Enable mysqli
 RUN docker-php-ext-install mysqli
 
-# Expose port 8080
-EXPOSE 8080
+# Set Apache to listen on the Railway port
+ENV APACHE_RUN_PORT ${PORT}
