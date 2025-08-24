@@ -1,17 +1,20 @@
 FROM php:8.2-apache
 
-# انسخ ملفات مشروعك داخل Apache web root
+# Install PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Enable mod_rewrite
+RUN a2enmod rewrite
+
+# Copy project files
 COPY . /var/www/html/
 
-# تأكد من الصلاحيات
+# Fix permissions for Apache
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# انسخ إعدادات Apache
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-
-# فعل mod_rewrite لو محتاجه
-RUN a2enmod rewrite
+# Copy custom apache config
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
