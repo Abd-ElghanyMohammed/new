@@ -1,7 +1,7 @@
-# Use official PHP image with Apache
+# Use PHP 8.2 with Apache
 FROM php:8.2-apache
 
-# Copy project files to web root
+# Copy all project files to Apache web root
 COPY . /var/www/html/
 
 # Enable mysqli extension
