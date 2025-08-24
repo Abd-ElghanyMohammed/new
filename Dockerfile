@@ -8,4 +8,5 @@ COPY . /var/www/html/
 RUN docker-php-ext-install mysqli
 
 # Set Apache to listen on the Railway port
-ENV APACHE_RUN_PORT ${PORT}
+ENV APACHE_RUN_PORT ${3306}
+
